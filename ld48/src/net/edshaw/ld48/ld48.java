@@ -18,7 +18,6 @@ public class ld48 extends Game {
 	
 	@Override
 	public void create() {
-
 		setScreen(new GameScreen(this));
 		fps = new FPSLogger();
 	}

@@ -1,6 +1,7 @@
 package net.edshaw.ld48;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
@@ -20,8 +21,32 @@ public abstract class Entity {
 		}
 	}
 
+	public final World world;
+
+	public final Vector2 pos;
+	public final Rectangle bounds;
+
+	public float health;
+
+	public Entity(World world, float x, float y, float w, float h){
+		this.world = world;
+		this.pos = new Vector2(x,y);
+		this.bounds = new Rectangle(x, y, w, h);
+	}
 
 	abstract void draw(float delta, SpriteBatch b);
 	abstract void update(float delta);
+
+	void move(float x, float y){
+		pos.add(x,y);
+		bounds.setCenter(pos);
+	}
+
+	void hurt(float damage){
+		this.health -= damage;
+		if (this.health<0){
+			this.world.toKill.add(this);
+		}
+	}
 
 }

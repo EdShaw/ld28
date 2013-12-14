@@ -17,50 +17,28 @@ public class GameScreen implements Screen {
 
 	Game game;
 
-	private OrthographicCamera camera;
 	private SpriteBatch batch;
 
-	private Player me;
-	private List<Entity> ents = new ArrayList<>();
+
+	private final World world;
 
 	public GameScreen(Game game){
 		this.game = game;
-
-		float w = Gdx.graphics.getWidth();
-		float h = Gdx.graphics.getHeight();
-
-		camera = new OrthographicCamera(1, h/w);
-		camera.setToOrtho(false, 400, 300);
 		batch = new SpriteBatch();
-
-		me = new Player();
-		ents.add(me);
+		world = new World();
 	}
 
 
 	public void update(float delta){
-		for(Entity e : ents){
-			e.update(delta);
-		}
+		Gdx.gl.glClearColor(0.8f, 0.7f, 1, 1);
+		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+
+		world.update(delta);
 	}
 
 	public void draw(float delta){
 
-		Gdx.gl.glClearColor(0.8f, 0.7f, 1, 1);
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		// TODO: Draw background;
-		batch.enableBlending();
-
-		// Draw sprites :)
-		for(Entity e : ents){
-			e.draw(delta, batch);
-		}
-
-		batch.disableBlending();
-		batch.end();
+		world.draw(delta, batch);
 
 	}
 
