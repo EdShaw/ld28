@@ -8,22 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player {
-
-	enum Direction {
-		// Define in clockwise order.
-		N, NE, E, SE, S, SW, W, NW;
-
-		Vector2 toVec(){
-			Vector2 vec = new Vector2(0,1);
-			vec.rotate(45*this.ordinal());
-			return vec;
-		}
-
-		float toAngle(){
-			return this.ordinal()*45.0f;
-		}
-	}
+public class Player extends Entity {
 
 	Sprite sprite;
 	Texture texture;
@@ -34,7 +19,7 @@ public class Player {
 
 	public Player(){
 		texture = new Texture(Gdx.files.internal("data/player.png"));
-		texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+		texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
 		sprite = new Sprite(texture);
 		sprite.setSize(16, 16);
@@ -69,7 +54,6 @@ public class Player {
 		if (righ && down) dir = Direction.SE;
 		if (down && left) dir = Direction.SW;
 		if (left && up) dir = Direction.NW;
-
 	}
 
 }

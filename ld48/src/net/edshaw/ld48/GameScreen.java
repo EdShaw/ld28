@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameScreen implements Screen {
 
 	Game game;
@@ -18,6 +21,7 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;
 
 	private Player me;
+	private List<Entity> ents = new ArrayList<>();
 
 	public GameScreen(Game game){
 		this.game = game;
@@ -28,12 +32,16 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera(1, h/w);
 		camera.setToOrtho(false, 400, 300);
 		batch = new SpriteBatch();
+
 		me = new Player();
+		ents.add(me);
 	}
 
 
 	public void update(float delta){
-		me.update(delta);
+		for(Entity e : ents){
+			e.update(delta);
+		}
 	}
 
 	public void draw(float delta){
@@ -45,11 +53,12 @@ public class GameScreen implements Screen {
 		batch.begin();
 		// TODO: Draw background;
 		batch.enableBlending();
-		// Draw sprites :)
-		me.draw(delta, batch);
-		// forEach entity, draw.
 
-		// The end
+		// Draw sprites :)
+		for(Entity e : ents){
+			e.draw(delta, batch);
+		}
+
 		batch.disableBlending();
 		batch.end();
 
