@@ -115,8 +115,9 @@ public class Player extends Entity {
 			RenderDebug.circle(area, new Color(0,0,1,1));
 
 			for (Entity ent : world.ents){
-				if(ent==this) break;
-				if(Intersector.overlaps(area, ent.bounds)){
+				System.out.println("Attack?");
+				if(ent!=this) if(Intersector.overlaps(area, ent.bounds)){
+					System.out.println("Attack!");
 					ent.hurt(weapon.damage);
 				}
 			}

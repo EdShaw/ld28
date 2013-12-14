@@ -31,9 +31,12 @@ public class World {
 		me = new Player(this, new Vector2(3,3));
 		ents.add(me);
 
-		ents.add(new Enemy(this, new Vector2(5,5)));
-		ents.add(new Enemy(this, new Vector2(0,5)));
-		ents.add(new Enemy(this, new Vector2(5,0)));
+		ents.add(new Enemy(this, new Vector2(5,10)));
+		ents.add(new Enemy(this, new Vector2(0,10)));
+		ents.add(new Enemy(this, new Vector2(10,0)));
+		ents.add(new Enemy(this, new Vector2(30,30)));
+		ents.add(new Enemy(this, new Vector2(30,60)));
+		ents.add(new Enemy(this, new Vector2(60,60)));
 
 		float w = Gdx.graphics.getWidth();
 		float h = Gdx.graphics.getHeight();
@@ -46,9 +49,8 @@ public class World {
 		for(Entity e : ents){
 			e.update(delta);
 		}
-		for (Entity e : toKill){
-			ents.remove(e);
-		}
+
+		ents.removeAll(toKill);
 		toKill.clear();
 
 	}

@@ -62,10 +62,14 @@ public class Enemy extends Entity {
 		repel.clamp(0.0f, 0.4f);
 
 		move(repel.x, repel.y);
-		Vector2 direction = playerPos.sub(this.pos).clamp(0.0f, 0.08f);
+		Vector2 direction = playerPos.sub(this.pos).clamp(0.0f, 0.05f);
 		move(direction.x, direction.y);
 
 		attacking = world.me.bounds.overlaps(this.bounds);
+		if (attacking) {
+			world.me.hurt(1);
+		}
+
 	}
 
 }
