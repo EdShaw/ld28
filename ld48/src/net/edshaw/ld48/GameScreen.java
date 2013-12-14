@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
 
 	public void draw(float delta){
 
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0.8f, 0.7f, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(camera.combined);
